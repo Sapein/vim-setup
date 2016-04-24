@@ -16,4 +16,7 @@ command Minetest !$(nohup minetest --go --name chanku --world /home/chanku/minet
 command MinetestMenu !$(nohup minetest 2&>1 >> /home/chanku/minetest/bin/development_debug.log &)
 
 let g:solarized_termcolors=256
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+set laststatus=2
 execute pathogen#infect()
