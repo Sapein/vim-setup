@@ -16,3 +16,6 @@
 [submodule "/home/chanku/.vim/bundle/vim-airline-themes"]
 	path = /home/chanku/.vim/bundle/vim-airline-themes
 	url = https://github.com/vim-airline/vim-airline-themes
+[submodule "bundle/vim-airline"]
+	path = bundle/vim-airline
+	url = https://github.com/vim-airline/vim-airline.git
