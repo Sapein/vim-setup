@@ -13,9 +13,8 @@ let g:sleepvariable = 5 "This variable exists only for the Pmakess command, it i
 
 " Colorscheme stuff
 command Desert colorscheme desert
-command Zen colorscheme zenburn
-command SolarD colorscheme solarized
-
+command Zen set background=dark | colorscheme zenburn
+command SolarD set background=dark | colorscheme solarized
 "Minetest Stuff
 command Minetest silent !$(nohup minetest --go --name chanku --world /home/chanku/minetest/worlds/testing_world 2&>1 >> /home/chanku/minetest/bin/development_debug.log &)
 command MinetestMenu silent !$(nohup minetest 2&>1 >> /home/chanku/minetest/bin/development_debug.log &)
