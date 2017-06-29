@@ -28,3 +28,6 @@
 [submodule "bundle/indentpython"]
 	path = bundle/indentpython
 	url = https://github.com/vim-scripts/indentpython.vim.git
+[submodule "bundle/zeavim.vim"]
+	path = bundle/zeavim.vim
+	url = https://github.com/KabbAmine/zeavim.vim.git

@@ -1,4 +1,10 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =2
-let g:netrw_dirhist_1='/usr/share/vim/vim74/syntax'
-let g:netrw_dirhist_2='/home/chanku/feel.vim/ftplugin/feel'
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/home/chanku/board_games/CoronTorak/corontorak'
+let g:netrw_dirhist_2='/home/chanku/rand_projs/mtg_card_catalouge/mtg_card_keeper'
+let g:netrw_dirhist_3='/home/chanku/c-programs'
+let g:netrw_dirhist_4='/home/chanku/emu/chip-8py/chip8_py'
+let g:netrw_dirhist_5='/home/chanku/Documents'
+let g:netrw_dirhist_6='/home/chanku/Documents/chars'
+let g:netrw_dirhist_7='/home/chanku/Documents'
+let g:netrw_dirhist_8='/home/chanku/Desktop/sws/pyserv/yawd'

@@ -52,6 +52,15 @@ autocmd FileType python imap <C-e> <esc>:Pmake<enter>
 autocmd FileType python imap <C-f> <esc>:Pmakess<enter>a
 autocmd FileType python imap <C-d> <esc>:Pmakes<enter>
 
+
+" Setup binary editing
+au BufRead,BufNewFile *.bin set filetype=binary
+autocmd FileType binary nmap ,h :%!xxd<enter>
+autocmd FileType binary nmap ,y :%!xxd -r <enter>
+autocmd FileType binary nmap ,n :%!xxd -p<enter>
+autocmd FileType binary nmap ,m :%!xxd -p -r<enter>
+
+
 " Set termcolors, airline stuff, and laststatus
 let g:solarized_termcolors=256
 let g:airline#extensions#tabline#enabled = 1
