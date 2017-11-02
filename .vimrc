@@ -7,6 +7,7 @@ set tabstop=4 "Sets tab stop to 4
 set softtabstop=4 "Sets spacing to 4
 set shiftwidth=4 "Sets shift width to 4
 set expandtab "Sets tab to be spaces
+let mapleader=","
 
 " Custom Variables
 let g:sleepvariable = 5 "This variable exists only for the Pmakess command, it is the number of seconds to have the shell sleep
@@ -45,8 +46,8 @@ autocmd FileType python command! Pmakess execute '!python3 %; sleep ' . sleepvar
 " Please note that <C-r> and <C-e> will take over the vim session and will
 "  require Vim (and potentially your terminal session) to be restarted if there
 "  is an endless loop.
-autocmd FileType python nmap ,m :Pmake<enter>
-autocmd FileType python nmap ,n :Pmakes<enter>
+autocmd FileType python nmap <Leader>m :Pmake<enter>
+autocmd FileType python nmap <Leader>n :Pmakes<enter>
 autocmd FileType python imap <C-r> <esc>:Pmake<enter>a
 autocmd FileType python imap <C-e> <esc>:Pmake<enter>
 autocmd FileType python imap <C-f> <esc>:Pmakess<enter>a
