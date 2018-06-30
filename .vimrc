@@ -147,6 +147,7 @@ function Async_Make_Stop(...)
         call win_gotoid(l:win_name)
         setlocal ma
         call append(line('$'), 'Make Stopped!')
+        setlocal noma
         wincmd p
         call job_stop(g:make_job, 'l:method')
         unlet g:make_job
