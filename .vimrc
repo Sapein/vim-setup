@@ -11,6 +11,7 @@ let mapleader=","
 
 " Custom Variables
 let g:sleepvariable = 5 "This variable exists only for the Pmakess command, it is the number of seconds to have the shell sleep
+let g:make_command = "/bin/sh -c make"
 
 " Colorscheme stuff
 command Desert colorscheme desert
@@ -76,11 +77,11 @@ autocmd FileType python imap <C-d> <esc>:Pmakes<enter>
 "WARNING: Arguments 3-20 are currently ignored (to be fixed)
 "TODO - Update to allow for usage of multiple args
 function Async_Make_Start(...)
-    if exists("g:make_job")
+    if exists("g:make_job") && job_status(g:make_job) ==? "run"
         echoerr 'Make is already running!'
         exe "normal \<Esc>"
     else
-        let l:make_command = "/bin/sh -c make"
+        let l:make_command = g:make_command
 
         if a:0 <= 0
             let l:make_file = ""
@@ -101,8 +102,23 @@ function Async_Make_Start(...)
         let l:make_command .= " " . l:make_file
         let l:make_command .= " " . l:make_args
         echom l:make_command
+        if bufexists('make_output')
+            let l:buff_num = bufnr('make_output')
+            try
+                let l:win_name = win_findbuf(l:buff_num)[0]
+                call win_gotoid(l:win_name)
+                wincmd c
+                wincmd p
+            catch E684
+                try
+                    bdelete! make_output
+                catch E94
+                    "Do nothing
+                endtry
+            endtry
+        endif
         new make_output
-        setlocal buftype=nofile bufhidden=hide
+        setlocal buftype=nofile bufhidden=hide noswapfile
         wincmd p
         let l:out_buff = bufnr('make_output')
         let g:make_job = job_start(l:make_command, {'out_io': 'buffer',
@@ -139,16 +155,15 @@ function Async_Make_Stop(...)
         let l:buff_num = ch_getbufnr(g:make_job, "err")
         try
             let l:win_name = win_findbuf(l:buff_num)[0]
+            call win_gotoid(l:win_name)
+            setlocal ma
+            call append(line('$'), 'Make Stopped!')
+            setlocal noma
+            wincmd p
         catch E684
             echoerr 'Buffer Window Not found!'
             exe "normal \<Esc>"
-            return
         endtry
-        call win_gotoid(l:win_name)
-        setlocal ma
-        call append(line('$'), 'Make Stopped!')
-        setlocal noma
-        wincmd p
         call job_stop(g:make_job, 'l:method')
         unlet g:make_job
     endif
