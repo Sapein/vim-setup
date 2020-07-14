@@ -21,12 +21,6 @@ command SolarD set background=dark | colorscheme solarized
 command Minetest silent !$(nohup minetest --go --name chanku --world /home/chanku/minetest/worlds/testing_world 2&>1 >> /home/chanku/minetest/bin/development_debug.log &)
 command MinetestMenu silent !$(nohup minetest 2&>1 >> /home/chanku/minetest/bin/development_debug.log &)
 
-" This would setup FEEL prior to the Feel plugin existing. 
-" autocmd BufNewFile,BufRead *.feel set filetype=lisp
-" autocmd FileType lisp let maplocalleader= '\' 
-autocmd FileType feel let maplocalleader= '\'
-let g:feel_command = "python3 /home/chanku/pygames/frozen-earth-engine/src/feel.py"
-
 " This sets up special keybinds and commands for Python3 Files
 "  Pmake allows me to run the python command directly from Vim on the current
 "  buffer. Pmakes does the same thing, but in the command line (Pmakess is a
