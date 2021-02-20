@@ -17,6 +17,7 @@ let g:make_command = "/bin/sh -c make"
 command Desert colorscheme desert
 command Zen set background=dark | colorscheme zenburn
 command SolarD set background=dark | colorscheme solarized
+
 "Minetest Stuff
 command Minetest silent !$(nohup minetest --go --name chanku --world /home/chanku/minetest/worlds/testing_world 2&>1 >> /home/chanku/minetest/bin/development_debug.log &)
 command MinetestMenu silent !$(nohup minetest 2&>1 >> /home/chanku/minetest/bin/development_debug.log &)
@@ -25,11 +26,11 @@ command MinetestMenu silent !$(nohup minetest 2&>1 >> /home/chanku/minetest/bin/
 "  Pmake allows me to run the python command directly from Vim on the current
 "  buffer. Pmakes does the same thing, but in the command line (Pmakess is a
 "   hack to allow you some time to read output before it returns to allow you to
-"   input more information.). 
+"   input more information.).
 "  These commands do require the file to be saved beforehand.
 "  Please note these will only exist when you are editing a .py file or your
 "   filetype is set to python.
-"  (NOTE: Pmake = Python Make, Pmakes = Python Make Shell, Pmakess = Python Make Sleep Shell.) 
+"  (NOTE: Pmake = Python Make, Pmakes = Python Make Shell, Pmakess = Python Make Sleep Shell.)
 autocmd FileType python command! Pmake py3file %
 autocmd FileType python command! Pmakes !python3 %
 autocmd FileType python command! Pmakess execute '!python3 %; sleep ' . sleepvariable
@@ -176,6 +177,9 @@ autocmd FileType binary nmap ,y :%!xxd -r <enter>
 autocmd FileType binary nmap ,n :%!xxd -p<enter>
 autocmd FileType binary nmap ,m :%!xxd -p -r<enter>
 
+
+" Set compiler for java to javac so I can use make
+autocmd FileType java compile! javac
 
 " Set termcolors, airline stuff, and laststatus
 let g:solarized_termcolors=256
