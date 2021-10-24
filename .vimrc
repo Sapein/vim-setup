@@ -31,9 +31,12 @@ command MinetestMenu silent !$(nohup minetest 2&>1 >> /home/chanku/minetest/bin/
 "  Please note these will only exist when you are editing a .py file or your
 "   filetype is set to python.
 "  (NOTE: Pmake = Python Make, Pmakes = Python Make Shell, Pmakess = Python Make Sleep Shell.)
-autocmd FileType python command! Pmake py3file %
-autocmd FileType python command! Pmakes !python3 %
-autocmd FileType python command! Pmakess execute '!python3 %; sleep ' . sleepvariable
+augroup python
+    autocmd!
+    " autocmd FileType python command! Pmake py3file %
+    " autocmd FileType python command! Pmakes !python3 %
+    " autocmd FileType python command! Pmakess execute '!python3 %; sleep ' . sleepvariable
+augroup END
 
 " These are the keybinds mentioned in the above comment, these allow an easy
 "  way to execute the commands above. In the imaps the binding <C-r> will enter
@@ -171,15 +174,18 @@ command -nargs=* MakeK call Async_Make_Stop(<f-args>)
 " End of Asyncronous Make Area
 
 " Setup binary editing
-au BufRead,BufNewFile *.bin set filetype=binary
-autocmd FileType binary nmap ,h :%!xxd<enter>
-autocmd FileType binary nmap ,y :%!xxd -r <enter>
-autocmd FileType binary nmap ,n :%!xxd -p<enter>
-autocmd FileType binary nmap ,m :%!xxd -p -r<enter>
+augroup binaryfile
+    autocmd!
+    au BufRead,BufNewFile *.bin set filetype=binary
+    autocmd FileType binary nmap ,h :%!xxd<enter>
+    autocmd FileType binary nmap ,y :%!xxd -r <enter>
+    autocmd FileType binary nmap ,n :%!xxd -p<enter>
+    autocmd FileType binary nmap ,m :%!xxd -p -r<enter>
+augroup END
 
 
 " Set compiler for java to javac so I can use make
-autocmd FileType java compile! javac
+autocmd FileType java compile! gradle
 
 " Set termcolors, airline stuff, and laststatus
 let g:solarized_termcolors=256
@@ -190,6 +196,50 @@ set laststatus=2
 " Change Colorscheme to Zen
 Zen
 
-let g:is_posix = 1
+" let g:project_path = ""
+
+" function! OpenInProject(file)
+"     exec "e " . g:project_path . "/" . a:file
+" endfunction
+
+" function! SetProject(project)
+"     let g:project_path = a:project
+" endfunction
+
+" function! ProjectPath()
+"     let g:project_path = expand("%:p:h")
+" endfunction
+
+" function! ProjectAutocomplete(ArgLead, CmdLine, CursorPos)
+"     let files = globpath(g:project_path, "*", 0, 1)
+"     call map(files, {k, v -> split(v, '/')[-1]})
+"     return join(files, "\n")
+" endfunction
+
+command! MLox make -b /home/sapeint/develop/lox/jlox/lox.gradle b
+command! MTool make -b /home/sapeint/develop/lox/jlox/loxtools.gradle b
+" command! Tool exec "!java -jar loxtools.jar " . g:project_path
+" command! Lox !java -jar lox.jar
+" command! -nargs=1 -complete=custom,ProjectAutocomplete Pe call OpenInProject(<f-args>)
+" command! -nargs=1 -complete=file PSet call SetProject(<f-args>)
+" autocmd FileType java call ProjectPath()
+autocmd FileType java set tabstop=2 "Sets tab stop to 2
+autocmd FileType java set softtabstop=2 "Sets spacing to 2
+autocmd FileType java set shiftwidth=2 "Sets shift width to 2
+
+
 " Start Pathogen
 execute pathogen#infect()
+
+let g:rust_fold = 1
+let g:is_posix = 1
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+nmap <F8> :TagbarToggle<CR>
+set foldmethod=syntax
