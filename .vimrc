@@ -159,10 +159,6 @@ set laststatus=2
 " Change Colorscheme to Zen
 Zen
 
-autocmd FileType java set tabstop=2 "Sets tab stop to 2
-autocmd FileType java set softtabstop=2 "Sets spacing to 2
-autocmd FileType java set shiftwidth=2 "Sets shift width to 2
-
 
 " Start Pathogen
 execute pathogen#infect()
